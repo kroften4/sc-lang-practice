@@ -9,6 +9,7 @@ currently using https://github.com/toxicity188/all-minecraft-language
 - save/load custom selection
 - load language file
 - 2 lists (useful, other) for each category
+- search by name / english equivalent
 
 options: 
 - load language (name, mc version)
@@ -23,7 +24,7 @@ categories:
   - names
   - both
 - advancements
-- biome (exclude minecraft.banner)
+- biome
 - difficulty
 - bar (sleep)
 - custom (work on convenient selection, maybe buttons to select everything from
@@ -36,6 +37,7 @@ modes:
 # sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+
 
 ## Creating a project
 

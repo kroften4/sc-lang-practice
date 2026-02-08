@@ -1,0 +1,90 @@
+[
+	{
+		"name": "advancements",
+		"useful": [],
+		"other": ["advancements.*"]
+	},
+	{
+		"name": "subtitles",
+		"useful": [
+			"subtitles.block.lava.ambient",
+			"subtitles.block.bubble_column.whirlpool_ambient",
+			"subtitles.block.water.ambient",
+			"subtitles.entity.silverfish.ambient",
+			"subtitles.entity.blaze.ambient",
+			"subtitles.entity.blaze.burn",
+			"subtitles.entity.piglin.ambient",
+			"subtitles.entity.piglin.step",
+			"subtitles.entity.wither_skeleton.ambient",
+			"subtitles.entity.zombie.ambient",
+			"subtitles.entity.skeleton.ambient",
+			"subtitles.entity.bat.ambient",
+			"subtitles.entity.bat.takeoff"
+		],
+		"other": ["subtitles.*"]
+	},
+	{
+		"name": "enchantment levels",
+		"useful": [
+			"enchantment.level.1",
+			"enchantment.level.2",
+			"enchantment.level.3",
+			"enchantment.level.4",
+			"enchantment.level.5"
+		],
+		"other": ["enchantment.level.*"]
+	},
+	{
+		"name": "enchantment names",
+		"useful": [
+			"enchantment.minecraft.looting",
+			"enchantment.minecraft.feather_falling",
+			"enchantment.minecraft.respiration",
+			"enchantment.minecraft.aqua_affinity",
+			"enchantment.minecraft.thorns",
+			"enchantment.minecraft.depth_strider",
+			"enchantment.minecraft.binding_curse",
+			"enchantment.minecraft.vanishing_curse",
+			"enchantment.minecraft.soul_speed",
+			"enchantment.minecraft.sharpness",
+			"enchantment.minecraft.knockback",
+			"enchantment.minecraft.fire_aspect",
+			"enchantment.minecraft.unbreaking",
+			"enchantment.minecraft.multishot",
+			"enchantment.minecraft.quick_charge",
+			"enchantment.minecraft.piercing",
+			"enchantment.minecraft.efficiency",
+			"enchantment.minecraft.silk_touch"
+		],
+		"other": ["enchantments.minecraft.*"]
+	},
+	{
+		"name": "difficulties",
+		"useful": [
+			"options.difficulty.peaceful.info",
+			"options.difficulty.easy.info",
+			"options.difficulty.normal.info",
+			"options.difficulty.hard.info"
+		],
+		"other": []
+	},
+	{
+		"name": "biomes",
+		"useful": [
+			"biome.minecraft.cold_ocean",
+			"biome.minecraft.deep_cold_ocean",
+			"biome.minecraft.frozen_ocean",
+			"biome.minecraft.deep_frozen_ocean",
+			"biome.minecraft.lukewarm_ocean",
+			"biome.minecraft.deep_lukewarm_ocean",
+			"biome.minecraft.ocean",
+			"biome.minecraft.deep_ocean",
+			"biome.minecraft.warm_ocean",
+			"biome.minecraft.frozen_river",
+			"biome.minecraft.river",
+			"biome.minecraft.snowy_beach",
+			"biome.minecraft.beach"
+		],
+		"other": ["biome.minecraft.*"]
+	}
+]
