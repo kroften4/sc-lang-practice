@@ -1,11 +1,11 @@
-[
-	{
-		"name": "advancements",
+{
+	"advancements": {
+		"name": "Advancements",
 		"useful": [],
 		"other": ["advancements.*"]
 	},
-	{
-		"name": "subtitles",
+	"subtitles": {
+		"name": "Subtitles",
 		"useful": [
 			"subtitles.block.lava.ambient",
 			"subtitles.block.bubble_column.whirlpool_ambient",
@@ -23,8 +23,8 @@
 		],
 		"other": ["subtitles.*"]
 	},
-	{
-		"name": "enchantment levels",
+	"enchantment_levels": {
+		"name": "Enchantment levels",
 		"useful": [
 			"enchantment.level.1",
 			"enchantment.level.2",
@@ -34,8 +34,8 @@
 		],
 		"other": ["enchantment.level.*"]
 	},
-	{
-		"name": "enchantment names",
+	"enchantment_names": {
+		"name": "Enchantment names",
 		"useful": [
 			"enchantment.minecraft.looting",
 			"enchantment.minecraft.feather_falling",
@@ -58,18 +58,18 @@
 		],
 		"other": ["enchantments.minecraft.*"]
 	},
-	{
-		"name": "difficulties",
+	"difficulties": {
+		"name": "Difficulties",
 		"useful": [
-			"options.difficulty.peaceful.info",
-			"options.difficulty.easy.info",
-			"options.difficulty.normal.info",
-			"options.difficulty.hard.info"
+			"options.difficulty.peaceful",
+			"options.difficulty.easy",
+			"options.difficulty.normal",
+			"options.difficulty.hard"
 		],
 		"other": []
 	},
-	{
-		"name": "biomes",
+	"biomes": {
+		"name": "Biomes",
 		"useful": [
 			"biome.minecraft.cold_ocean",
 			"biome.minecraft.deep_cold_ocean",
@@ -87,4 +87,4 @@
 		],
 		"other": ["biome.minecraft.*"]
 	}
-]
+}

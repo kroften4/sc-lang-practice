@@ -1,8 +1,9 @@
-currently using https://github.com/toxicity188/all-minecraft-language
+- minecraft font: https://github.com/tryashtar/minecraft-ttf/releases
+- language assets: local prism files
 
 # TODO
 - minecraft font
-- figure out where and how to download all language files for each version
+- sort dropdowns
 
 ## UX
 - honestly this could be really similar to monkeytype
@@ -27,8 +28,17 @@ categories:
 - biome
 - difficulty
 - bar (sleep)
-- custom (work on convenient selection, maybe buttons to select everything from
+- custom (work on convenient selection
   a predefined category, somehow mask select like `biome.minecraft.*`)
+  - search, button to select/deselect all results
+
+a category should be just a preload, with ability to customize it and add/remove
+items from it. also would be great to be able to create more then 1 custom
+category
+
+dropdown list of categories + "create"
+when category selected, another dropdown for modifying category items, and a
+button to reset to default
 
 modes:
 - like language-learning cards: show a question, flip to check your answer
