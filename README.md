@@ -2,8 +2,12 @@
 - language assets: local prism files
 
 # TODO
-- minecraft font
+- updating the lang while searching does not update the items translation
+- displaying a lot of items lags the fuck out
+- normal/minecraft/unicodefont toggle
+- strict search toggle
 - sort dropdowns
+- show english if no translation
 
 ## UX
 - honestly this could be really similar to monkeytype

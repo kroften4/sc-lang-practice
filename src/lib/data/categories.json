@@ -80,6 +80,7 @@
 			"biome.minecraft.ocean",
 			"biome.minecraft.deep_ocean",
 			"biome.minecraft.warm_ocean",
+			"biome.minecraft.deep_warm_ocean",
 			"biome.minecraft.frozen_river",
 			"biome.minecraft.river",
 			"biome.minecraft.snowy_beach",
