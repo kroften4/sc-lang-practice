@@ -36,7 +36,10 @@
 	});
 </script>
 
-<input bind:value={searchTerm} class="m-1 border-2" />
+<input bind:value={searchTerm}
+	class="m-1 border-2"
+	placeholder="How did we get here?..."
+/>
 
 {#each filteredList as item}
 	<Item

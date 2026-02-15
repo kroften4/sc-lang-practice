@@ -8,13 +8,13 @@
 - strict search toggle
 - sort dropdowns
 - show english if no translation
+- highlight fuzzy find
 
 ## UX
 - honestly this could be really similar to monkeytype
 - save/load custom selection
 - load language file
 - 2 lists (useful, other) for each category
-- search by name / english equivalent
 
 options: 
 - load language (name, mc version)

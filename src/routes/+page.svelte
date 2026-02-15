@@ -1,37 +1,44 @@
 <script lang="ts">
 	import langList from '$lib/data/langlist.json';
-	import engLangData from '$lib/data/en_gb.json';
+	import engLangDataTemp from '$lib/data/en_gb.json';
 	import categoriesData from '$lib/data/categories.json';
-	import ItemsSelect from './ItemsSelect.svelte';
-	import Dropdown from '$lib/Dropdown.svelte';
+	import ItemSearch from './ItemSearch.svelte';
 	import type { Dictionary } from '$lib/types/Dictionary';
-	import Item from './Item.svelte';
+	import { onMount } from 'svelte';
+	import CardsMode from './CardsMode.svelte';
+	import type { Category } from '$lib/types/Category';
+	import SettingsBar from './SettingsBar.svelte';
 
-	let langNames = langList.map((name: string) => name.split('.')[0]).sort();
-	let langKeys = Object.keys(engLangData);
+	const engLangData: Dictionary<string> = engLangDataTemp;
 
-	type Category = { name: string; useful: string[]; other: string[] };
+	const langNames = langList.map((name: string) => name.split('.')[0]).sort();
+	const translationKeys = Object.keys(engLangData);
+
 	prepareCategories(categoriesData);
 	let categories: Dictionary<Category> = $state(categoriesData);
 
+	onMount(loadLang);
+
 	let selectedLangName = $state(langNames[0]);
 	let selectedLangData = $state(null);
-	$effect(() => {
-		fetch(`/langfiles/${selectedLangName}.json`)
-			.then((r) => r.json())
-			.then((r) => {
-				selectedLangData = r;
-			});
-		return;
-	});
+
+	$effect(loadLang);
+
+	type Mode = 'cards' | 'quiz' | 'look';
+	let selectedMode: Mode = $state('cards');
 
 	let selectedCategoryId: string = $state(Object.keys(categories)[0]);
 	let selectedCategory: Category = $derived(categories[selectedCategoryId]);
 
 	let searchTerm = '';
 
-	function addCategory(id: string, item: Category) {
-		categories[id] = item;
+	function loadLang() {
+		fetch(`/langfiles/${selectedLangName}.json`)
+			.then((r) => r.json())
+			.then((r) => {
+				selectedLangData = r;
+			});
+		return;
 	}
 
 	function prepareCategories(dict: Dictionary<Category>) {
@@ -47,7 +54,7 @@
 	function prepareCategoryList(list: string[]): Set<string> {
 		let result: Set<string> = new Set();
 		for (let item of list) {
-			if (langKeys.includes(item)) {
+			if (translationKeys.includes(item)) {
 				result.add(item);
 				continue;
 			}
@@ -55,7 +62,7 @@
 			// TODO: handle * in the middle
 			if (item.endsWith('*')) {
 				let term = item.slice(0, -1);
-				let filtered = langKeys.filter((it) => it.startsWith(term));
+				let filtered = translationKeys.filter((it) => it.startsWith(term));
 				result = result.union(new Set(filtered));
 			} else {
 				console.warn(`${item} not found`);
@@ -69,83 +76,46 @@
 	Search Crafting Language Learning
 </h1>
 
-<div
-	class="inline-block w-full content-center border-2 bg-indigo-200
-    p-2"
->
-	<label for="lang-select">Language: </label>
-	<Dropdown
-		id="lang-select"
-		bind:value={selectedLangName}
-		contents={langNames}
-		--outline-width="2px"
-		--bg-color="var(--color-violet-200)"
-	/>
-	<label for="category-select">Category: </label>
-	<Dropdown
-		id="category-select"
-		bind:value={selectedCategoryId}
-		values={Object.keys(categories)}
-		contents={Object.values(categories).map((it) => it.name)}
-		--outline-width="2px"
-		--bg-color="var(--color-violet-200)"
-	/>
-	<button class="bg-violet-200 px-[9px] py-[2px] outline-2"> + </button>
-</div>
+<SettingsBar
+	bind:selectedLangName
+	{langNames}
+	bind:selectedMode
+	bind:selectedCategoryId
+	{categories}
+/>
 
 {#if selectedLangData}
-	<ItemsSelect langData={selectedLangData} {engLangData} />
+	{#if selectedMode === 'cards'}
+		<CardsMode translatedLangData={selectedLangData} />
+	{:else if selectedMode === 'quiz'}
+		<div>Nothing yet</div>
+	{:else if selectedMode === 'look'}
+		<ItemSearch langData={selectedLangData} {engLangData} />
+	{/if}
 {/if}
 
-<!-- {#if selectedLangData} -->
-<!-- 	<p> -->
-<!-- 		Loaded {selectedLangData['language.name']} -->
-<!-- 		({selectedLangData['language.region']}) -->
-<!-- 	</p> -->
-<!---->
-<!-- 	<br /> -->
-<!-- 	<h1>Useful</h1> -->
-<!-- 	{#each selectedCategory.useful as usefulItem} -->
-<!-- 		<b>{usefulItem}:</b> -->
-<!-- 		<div class="mc-font inline text-lg"> -->
-<!-- 			{selectedLangData[usefulItem]} -->
-<!-- 		</div> -->
-<!-- 		<br /> -->
-<!-- 	{/each} -->
-<!-- 	<br /> -->
-<!---->
-<!-- 	<h1>Other</h1> -->
-<!-- 	{#each selectedCategory.other as item} -->
-<!-- 		<b>{item}:</b> -->
-<!-- 		<div class="mc-font inline text-lg"> -->
-<!-- 			{selectedLangData[item]} -->
-<!-- 		</div> -->
-<!-- 		<br /> -->
-<!-- 	{/each} -->
-<!-- {:else} -->
-<!-- 	<p>Loading...</p> -->
-<!-- {/if} -->
-<!---->
 <style>
 	:root {
 		margin: 5px;
 		background-color: var(--color-violet-100);
 	}
 
-	@font-face {
-		font-family: Minecraft;
-		size-adjust: 130%;
-		src: url(/fonts/MinecraftDefault-Regular.ttf);
-	}
-	@font-face {
-		font-family: 'GNU Unifont';
-		src: url(/fonts/unifont-17.0.03.otf);
-	}
-	@font-face {
-		font-family: 'GNU Unifont Japanese';
-		src: url(/fonts/unifont_jp-17.0.03.otf);
-	}
-	.mc-font {
-		font-family: Minecraft, 'GNU Unifont', 'GNU Unifont Japanese';
+	:global {
+		@font-face {
+			font-family: Minecraft;
+			size-adjust: 130%;
+			src: url(/fonts/MinecraftDefault-Regular.ttf);
+		}
+		@font-face {
+			font-family: 'GNU Unifont';
+			src: url(/fonts/unifont-17.0.03.otf);
+		}
+		@font-face {
+			font-family: 'GNU Unifont Japanese';
+			src: url(/fonts/unifont_jp-17.0.03.otf);
+		}
+		.mc-font {
+			font-family: Minecraft, 'GNU Unifont', 'GNU Unifont Japanese';
+		}
 	}
 </style>

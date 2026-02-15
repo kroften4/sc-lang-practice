@@ -1,7 +1,32 @@
 {
 	"advancements": {
 		"name": "Advancements",
-		"useful": [],
+		"useful": [
+            "advancements.story.smelt_iron.title",
+            "advancements.story.mine_diamond.title",
+            "advancements.adventure.trade.title",
+            "advancements.story.mine_stone.title",
+            "advancements.story.lava_bucket.title",
+            "advancements.story.enter_the_nether.title",
+            "advancements.story.iron_tools.title",
+            "advancements.nether.find_bastion.title",
+            "advancements.nether.loot_bastion.title",
+            "advancements.story.form_obsidian.title",
+            "advancements.nether.distract_piglin.title",
+            "advancements.story.shiny_gear.title",
+            "advancements.nether.find_fortress.title",
+            "advancements.adventure.kill_a_mob.title",
+            "advancements.nether.obtain_blaze_rod.title",
+            "advancements.nether.get_wither_skull.title",
+            "advancements.story.deflect_arrow.title",
+            "advancements.story.follow_ender_eye.title",
+            "advancements.adventure.sleep_in_bed.title",
+            "advancements.story.enter_the_end.title",
+            "advancements.end.kill_dragon.title",
+            "advancements.adventure.shoot_arrow.title",
+            "advancements.adventure.ol_betsy.title",
+            "advancements.nether.obtain_crying_obsidian.title"
+        ],
 		"other": ["advancements.*"]
 	},
 	"subtitles": {
