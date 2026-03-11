@@ -8,6 +8,7 @@
 	import CardsMode from './CardsMode.svelte';
 	import type { Category } from '$lib/types/Category';
 	import SettingsBar from './SettingsBar.svelte';
+	import { page } from '$app/state';
 
 	const engLangData: Dictionary<string> = engLangDataTemp;
 
@@ -31,7 +32,7 @@
 	let selectedCategory: Category = $derived(categories[selectedCategoryId]);
 
 	function loadLang() {
-		fetch(`/langfiles/${selectedLangName}.json`)
+		fetch(`/${page.route.id}/langfiles/${selectedLangName}.json`)
 			.then((r) => r.json())
 			.then((r) => {
 				selectedLangData = r;
