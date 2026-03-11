@@ -31,10 +31,12 @@
 	let selectedCategoryId: string = $state(Object.keys(categories)[0]);
 	let selectedCategory: Category = $derived(categories[selectedCategoryId]);
 
-    const base = resolve("/");
+	const base = resolve('/');
 
 	function loadLang() {
-		fetch(`/${base}/langfiles/${selectedLangName}.json`)
+		const path = `${base}langfiles/${selectedLangName}.json`;
+        // console.log(path)
+		fetch(path)
 			.then((r) => r.json())
 			.then((r) => {
 				selectedLangData = r;
@@ -86,8 +88,8 @@
 	{categories}
 />
 
-<p> Useful: {selectedCategory.useful.length}</p>
-<p> Other: {selectedCategory.other.length}</p>
+<p>Useful: {selectedCategory.useful.length}</p>
+<p>Other: {selectedCategory.other.length}</p>
 
 {#if selectedLangData}
 	{#if selectedMode === 'cards'}
