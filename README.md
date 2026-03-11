@@ -1,3 +1,4 @@
+test
 - minecraft font: https://github.com/tryashtar/minecraft-ttf/releases
 - language assets: local prism files
 
