@@ -10,7 +10,9 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH,
+			assets: process.argv.includes('dev') ? '' : process.env.BASE_PATH,
+            relative: true
 		}
 	},
 	// preprocess: vitePreprocess()
