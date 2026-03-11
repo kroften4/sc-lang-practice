@@ -32,6 +32,7 @@
 	});
 
 	$effect(() => {
+        // TODO: this takes a long time and everything is lagging
 		filteredList = fuse.search(searchTerm);
 	});
 </script>

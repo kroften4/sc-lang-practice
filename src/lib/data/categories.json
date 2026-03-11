@@ -27,7 +27,7 @@
             "advancements.adventure.ol_betsy.title",
             "advancements.nether.obtain_crying_obsidian.title"
         ],
-		"other": ["advancements.*"]
+		"other": ["advancements.*.title"]
 	},
 	"subtitles": {
 		"name": "Subtitles",

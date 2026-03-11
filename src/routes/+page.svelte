@@ -30,8 +30,6 @@
 	let selectedCategoryId: string = $state(Object.keys(categories)[0]);
 	let selectedCategory: Category = $derived(categories[selectedCategoryId]);
 
-	let searchTerm = '';
-
 	function loadLang() {
 		fetch(`/langfiles/${selectedLangName}.json`)
 			.then((r) => r.json())
@@ -70,6 +68,7 @@
 		}
 		return result;
 	}
+	$inspect(selectedCategory).with(console.log);
 </script>
 
 <h1 class="m-2 text-center text-3xl font-bold">
@@ -84,9 +83,16 @@
 	{categories}
 />
 
+<p> Useful: {selectedCategory.useful.length}</p>
+<p> Other: {selectedCategory.other.length}</p>
+
 {#if selectedLangData}
 	{#if selectedMode === 'cards'}
-		<CardsMode translatedLangData={selectedLangData} />
+		<CardsMode
+			categoryData={selectedCategory}
+			translatedLangData={selectedLangData}
+			options={{ infinite: true, uselessChance: 1 }}
+		/>
 	{:else if selectedMode === 'quiz'}
 		<div>Nothing yet</div>
 	{:else if selectedMode === 'look'}

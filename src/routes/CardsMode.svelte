@@ -3,38 +3,83 @@
 	import type { LangItem } from '$lib/types/LangItem';
 	import type { Dictionary } from '$lib/types/Dictionary';
 	import engLangDataTemp from '$lib/data/en_gb.json';
-
-	function shuffleArray(arr: any[]): any[] {
-		return arr.toSorted(function (a, b) {
-			return Math.random() - 0.5;
-		});
-	}
+	import type { Category } from '$lib/types/Category';
+	import { shuffleArray, randIndex } from '$lib/utils';
 
 	const engLangData: Dictionary<string> = engLangDataTemp;
 
-	let { translatedLangData } = $props();
+	type CardModeOptions = {
+		infinite: boolean;
+		uselessChance: number;
+	};
+	type Props = {
+		categoryData: Category;
+		translatedLangData: Dictionary<string>;
+		options: CardModeOptions;
+	};
+	let { categoryData, translatedLangData, options }: Props = $props();
 
-	const keys: string[] = shuffleArray(Object.keys(engLangDataTemp));
-	let currIndex: number = 0;
-	let selectedKey: string = $state(keys[currIndex]);
-	function nextKey() {
-		currIndex++;
-		selectedKey = keys[currIndex];
-	}
+	let itemGenerator: Generator<LangItem> | null = $state(null);
 
-	let currItem: LangItem = $derived({
-		key: selectedKey,
-		translated: translatedLangData[selectedKey] ?? engLangData[selectedKey],
-		original: engLangData[selectedKey]
+	$effect(() => {
+		itemGenerator = genItem(
+			categoryData,
+			engLangData,
+			translatedLangData,
+			options
+		);
 	});
 
-	// function updateCurrItem() {
-	// 	currItem = {
-	// 		key: selectedKey,
-	// 		translated: translatedLangData[selectedKey],
-	// 		original: engLangData[selectedKey]
-	// 	};
-	// }
+	let currItem: LangItem | null = $state(null);
+	$effect(() => {
+		if (itemGenerator !== null) {
+			currItem = itemGenerator.next().value;
+		}
+	});
+
+	// $inspect(categoryData).with(console.log);
+
+	function nextItem() {
+		if (itemGenerator !== null) {
+			currItem = itemGenerator.next().value;
+		}
+	}
+
+	function* genItem(
+		categoryData: Category,
+		engLangData: Dictionary<string>,
+		translatedLangData: Dictionary<string>,
+		options: CardModeOptions
+	): Generator<LangItem> {
+		const keys: string[] = categoryData.useful.slice();
+		if (categoryData.other.length > 0) {
+			for (let i = 0; i < options.uselessChance; i++) {
+				const r: number = randIndex(categoryData.other)!!;
+				keys.push(categoryData.other[r]);
+			}
+		}
+		shuffleArray(keys);
+		while (options.infinite) {
+			for (let i = 0; i < keys.length; i++) {
+				let currKey: string = keys[i];
+				const item: LangItem = {
+					key: currKey,
+					translated: translatedLangData[currKey] ?? engLangData[currKey],
+					original: engLangData[currKey]
+				};
+				yield item;
+			}
+		}
+	}
 </script>
 
-<Card item={currItem} onNext={nextKey} />
+<p>
+	{options.infinite ? 'Infinite mode' : 'Not infinite mode'}
+</p>
+<p>
+	Useless chance: {options.uselessChance} / {categoryData.useful.length}
+</p>
+
+{#if currItem !== null}
+	<Card item={currItem} onNext={nextItem} />
+{/if}
